@@ -1,6 +1,6 @@
-# mscft<br>
-<br>
-Sample input in data file:<br>
+# mscft
+
+Sample input in data file:
 A B CD CE S
 A D E S
 1 0 0 0
