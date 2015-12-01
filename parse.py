@@ -51,11 +51,9 @@ if __name__ == "__main__":
 	for line in content:
 		if state is States.LINES:
 			l=line.split(' ')
-			print(l)
 			state=States.COLUMNS
 		elif state is States.COLUMNS:
 			c=line.split(' ')
-			print(c)
 			state=States.MATRIX
 		elif state is States.MATRIX:	
 			for i in line.split(' '):
@@ -67,6 +65,5 @@ if __name__ == "__main__":
 				state=States.END
 		elif state is States.END:
 			pass
-	print(m)
 	mcs=MCS(l, c, m)
 	print(mcs)
