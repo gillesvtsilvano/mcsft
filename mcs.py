@@ -134,7 +134,7 @@ class MCSParser:
 		s+="end\n\n"
 		s+="end"
 		
-		with open(self.outfname, 'w') as f:
+		with open(self.outputfname, 'w') as f:
 			f.write(s)
 		f.close()
 
