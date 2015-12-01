@@ -1,4 +1,20 @@
 #!/usr/bin/env python
+# Input:
+# KooN | AND | OR
+# A B C D E S
+# A 0.001
+# B 0.001
+# C 0.001
+# D 0.001
+# E 0.001
+# S 0.001
+# A+BD+BE+CD+CE+S
+# B+CE+DC+S
+# D+CE+BE+S
+# C+S
+# E+S
+#
+
 
 class States:
 	TOP=0
@@ -19,57 +35,12 @@ class Node:
 
 
 class MCSParser:
-	inputfname='data'
-	outputfname='out.sharpe'
-
 	def __init__(self):
 		self.top = ''
 		self.nodes = {}
 		self.target = ''
-	
+
 	def parse(self):
-
-		with open(self.inputfname) as f:
-			content = [ x.strip('\n') for x in f.readlines()]
-		f.close()
-
-		state=States.TOP
-
-		while state is not States.END:
-			if state is States.TOP:
-				self.top = content[0].split(' ')[0]
-
-				state = States.NODES
-			elif state is States.NODES:
-				for i in content[1].split(' '):
-					n=Node()
-					n.identifier = i
-					self.nodes[i] = n
-		
-				n=len(self.nodes)
-				state = States.LAMBDAS
-			elif state is States.LAMBDAS:
-				if n > 0:
-					l=content[n+1].split(' ')
-					i, p = l[0], l[1]
-					self.nodes[i].param=float(p)
-					n-=1
-				else:
-					n = len(self.nodes) - 1
-					state = States.MCS
-			elif state is States.MCS:
-				if n > 0:
-					l=content[n+7].split('=')
-					i,m = l[0], l[1].split('+')
-					self.nodes[i].mcs=m
-					n-=1
-				else:
-					state = States.END
-			elif state is States.END:
-				break
-
-
-		
 		s='bind\n'
 		nodes = self.nodes.items()
 		for k,n in nodes:
@@ -81,6 +52,7 @@ class MCSParser:
 		for k,n in nodes:
 			if n.mcs == []:
 				self.target = k
+				print("Target: %s" % k)
 
 		for k,n in nodes:
 			if counter is 0:
@@ -135,10 +107,53 @@ class MCSParser:
 		s+="end"
 		
 		with open('out.sharpe', 'w') as f:
-				f.write(s)
+			f.write(s)
 		f.close()
 
 
-if __name__=="__main__":
-	parser=MCSParser()
-	parser.parse()
+
+with open('data') as f:
+	content = [ x.strip('\n') for x in f.readlines()]
+f.close()
+print(content)
+
+state=States.TOP
+
+parser=MCSParser()
+
+while state is not States.END:
+	if state is States.TOP:
+		parser.top = content[0].split(' ')[0]
+
+		state = States.NODES
+	elif state is States.NODES:
+		for i in content[1].split(' '):
+			n=Node()
+			n.identifier = i
+			parser.nodes[i] = n
+		n=len(parser.nodes)
+		state = States.LAMBDAS
+	elif state is States.LAMBDAS:
+		if n > 0:
+			l=content[n+1].split(' ')
+			i, p = l[0], l[1]
+			parser.nodes[i].param=float(p)
+			n-=1
+		else:
+			n = len(parser.nodes) - 1
+			state = States.MCS
+	elif state is States.MCS:
+		if n > 0:
+			l=content[n+7].split('=')
+			i,m = l[0], l[1].split('+')
+			parser.nodes[i].mcs=m
+			n-=1
+		else:
+			state = States.END
+	elif state is States.END:
+		break
+
+for k,d in parser.nodes.items():
+	print('%s' % d)
+
+parser.parse()
