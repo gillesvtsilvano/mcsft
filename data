@@ -1,7 +1,14 @@
-A B CD CE S
-A D E S
-1 0 0 0
-0 1 1 0
-0 1 0 0
-0 0 1 0
-0 0 0 1
+2oo5 
+A B C D E S
+A 0.001
+B 0.001
+C 0.001
+D 0.001
+E 0.001
+S 0.001
+A=A+B.D+B.E+C.D+C.E+S
+B=B+C.E+D.C+S
+C=C+S
+D=D+C.E+B.E+S
+E=E+S
+
