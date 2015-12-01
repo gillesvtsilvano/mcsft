@@ -90,7 +90,8 @@ class MCSParser:
 			s+='kofn koon0,%d,%d' % (int(k), int(n))
 
 			for k,n in nodes:
-				s+=" %s_or0" % (n.identifier)
+				if not (n.identifier is self.target):	
+					s+=" %s_or0" % (n.identifier)
 			s+="\n"
 					
 		elif self.top is "AND":
