@@ -44,7 +44,6 @@ if __name__ == "__main__":
 	with open(fname) as f:
 		content = [x.strip('\n') for x in f.readlines()]
 	f.close()
-	print(content)
 	state=States.LINES
 	lCounter=0
 	m=[[]]
