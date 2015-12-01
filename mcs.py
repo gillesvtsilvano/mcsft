@@ -135,7 +135,7 @@ class MCSParser:
 		s+="end"
 		
 		with open('out.sharpe', 'w') as f:
-				f.write(s)
+			f.write(s)
 		f.close()
 
 
