@@ -123,12 +123,35 @@ class MCSParser:
 				if not (n.identifier is self.target):	
 					s+=" %s_or0" % (n.identifier)
 			s+="\n"
-					
-		elif self.top is "AND":
-			pass
-		elif self.top is "OR":
-			pass			
-				
+			
+		else:
+			andCount=0
+			expr=self.top.split('+')
+			for e in expr:
+				if len(e) > 1:
+					s+='and and__%d' % andCount
+					andCount+=1
+					for i in e:
+						s+=' %s_or0' % i
+				s+='\n'
+	
+			andCount=0
+			orCount=0
+			s+='or or__%d' % orCount
+			for e in expr:
+				orCount+=1
+				if len(e) == 1:
+					s+=' %s_or0' % e
+				else:
+					s+=' and__%d'% andCount
+					andCount+=1
+
+			s+='\n'
+
+
+
+
+
 		s+="end\n\n"
 		s+="func Reliability(t) 1-tvalue(t; model)\n"
 		s+="loop t,0,1000,10\n"
