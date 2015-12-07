@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-import sys
-
 class States:
 	TOP=0
 	NODES=1
@@ -117,7 +115,7 @@ class MCSParser:
 			k = self.top.split('oo')[0]
 			n = self.top.split('oo')[1]
 			
-			s+='kofn koon0 %d,%d,' % (int(k), int(n))
+			s+='kofn koon0,%d,%d' % (int(k), int(n))
 
 			for k,n in nodes:
 				if not (n.identifier is self.target):	
@@ -127,7 +125,7 @@ class MCSParser:
 		elif self.top is "AND":
 			pass
 		elif self.top is "OR":
-			pass			
+			pass				
 				
 		s+="end\n\n"
 		s+="func Reliability(t) 1-tvalue(t; model)\n"
@@ -143,7 +141,4 @@ class MCSParser:
 
 if __name__=="__main__":
 	parser=MCSParser()
-	if len(sys.argv) == 2:
-		parser.inputfname=sys.argv[1]
-
 	parser.parse()
