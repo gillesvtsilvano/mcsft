@@ -27,7 +27,10 @@ or E_or0 E S
 and D_and0 C E
 and D_and1 B E
 or D_or0 D D_and0 D_and1 S
-kofn koon0 2,5, A_or0 C_or0 B_or0 E_or0 D_or0
+
+and and__0 B_or0 C_or0
+and and__1 D_or0 E_or0
+or or__0 A_or0 and__0 and__1
 end
 
 func Reliability(t) 1-tvalue(t; model)

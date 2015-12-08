@@ -96,7 +96,7 @@ class MCSParser:
 			for ands in n.mcs:
 				if len(ands) > 1:
 					s+="and %s_and%d" % (n.identifier, andCount)
-					for e in ands.split('.'):
+					for e in ands:
 						s+=" %s" % e
 					s+="\n"
 					andCount+=1
@@ -147,9 +147,6 @@ class MCSParser:
 					andCount+=1
 
 			s+='\n'
-
-
-
 
 
 		s+="end\n\n"
