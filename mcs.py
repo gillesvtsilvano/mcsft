@@ -36,11 +36,10 @@ class MCSParser:
 		f.close()
 
 		state=States.TOP
-
+		c=2
 		while state is not States.END:
 			if state is States.TOP:
 				self.top = content[0].split(' ')[0]
-
 				state = States.NODES
 			elif state is States.NODES:
 				for i in content[1].split(' '):
@@ -57,11 +56,17 @@ class MCSParser:
 					self.nodes[i].param=float(p)
 					n-=1
 				else:
-					n = len(self.nodes) - 1
+					#n = len(self.nodes) - 1
+					n = len(content) - 1
 					state = States.MCS
+					if self.top.find('oo'):
+						c+=len(self.nodes) - 1
+					else:
+						for i in self.top.split('+'):
+							c+=len(i)
 			elif state is States.MCS:
-				if n > 0:
-					l=content[n+7].split('=')
+				if n > c:
+					l=content[n].split('=')
 					i,m = l[0], l[1].split('+')
 					self.nodes[i].mcs=m
 					n-=1

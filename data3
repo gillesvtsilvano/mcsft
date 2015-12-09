@@ -1,4 +1,4 @@
-2oo5 
+BE
 A B C D E S
 A 0.001
 B 0.001
@@ -6,8 +6,5 @@ C 0.001
 D 0.001
 E 0.001
 S 0.001
-A=A+BD+BE+CD+CE+S
-B=B+CE+DC+S
-C=C+S
-D=D+CE+BE+S
+B=B+S+CD+CE
 E=E+S

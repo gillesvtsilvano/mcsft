@@ -6,9 +6,8 @@ C 0.001
 D 0.001
 E 0.001
 S 0.001
-A=A+B.D+B.E+C.D+C.E+S
-B=B+C.E+D.C+S
+A=A+BD+BE+CD+CE+S
+B=B+CE+DC+S
 C=C+S
-D=D+C.E+B.E+S
+D=D+CE+BE+S
 E=E+S
-

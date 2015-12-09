@@ -14,20 +14,15 @@ repeat B exp(lambda_B)
 repeat E exp(lambda_E)
 repeat D exp(lambda_D)
 repeat S exp(lambda_S)
-and A_and0 B D
-and A_and1 B E
-and A_and2 C D
-and A_and3 C E
-or A_or0 A A_and0 A_and1 A_and2 A_and3 S
-or C_or0 C S
-and B_and0 C E
-and B_and1 D C
-or B_or0 B B_and0 B_and1 S
+or A_or0
+or C_or0
+and B_and0 C D
+and B_and1 C E
+or B_or0 B S B_and0 B_and1
 or E_or0 E S
-and D_and0 C E
-and D_and1 B E
-or D_or0 D D_and0 D_and1 S
-kofn koon0 2,5, A_or0 C_or0 B_or0 E_or0 D_or0
+or D_or0
+and and__0 B_or0 E_or0
+or or__0 and__0
 end
 
 func Reliability(t) 1-tvalue(t; model)
